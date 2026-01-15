@@ -1,0 +1,29 @@
+[
+  {
+    "model": "services.AdditionalService",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "name": "Market Analysis",
+      "description": "Detailed market research and opportunity assessment."
+    }
+  },
+  {
+    "model": "services.AdditionalService",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "name": "Financial Analysis",
+      "description": "Professional financial evaluation and forecasting."
+    }
+  },
+  {
+    "model": "services.AdditionalService",
+    "pk": 3,
+    "fields": {
+      "product": 1,
+      "name": "Investment Support",
+      "description": "Support in attracting and structuring investments."
+    }
+  }
+]

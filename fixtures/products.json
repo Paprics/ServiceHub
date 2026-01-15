@@ -1,0 +1,38 @@
+[
+  {
+    "model": "services.Product",
+    "pk": 1,
+    "fields": {
+      "title": "Professional business plan development (UNIDO & EBRD)",
+      "description": "Professional business plan development according to international UNIDO and EBRD standards.",
+      "category": 1
+    }
+  },
+  {
+    "model": "services.Product",
+    "pk": 2,
+    "fields": {
+      "title": "Digital Marketing",
+      "description": "Full-cycle digital marketing services including SEO, PPC, SMM and analytics.",
+      "category": 2
+    }
+  },
+  {
+    "model": "services.Product",
+    "pk": 3,
+    "fields": {
+      "title": "IT Services — Ukraine",
+      "description": "IT services and software development for clients in Ukraine.",
+      "category": 3
+    }
+  },
+  {
+    "model": "services.Product",
+    "pk": 4,
+    "fields": {
+      "title": "Sales Training",
+      "description": "Sales techniques, objection handling, lead generation, upsell strategies.",
+      "category": 4
+    }
+  }
+]

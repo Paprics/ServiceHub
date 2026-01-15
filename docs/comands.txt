@@ -1,0 +1,13 @@
+
+
+python src/manage.py loaddata fixtures/categories.json
+python src/manage.py loaddata fixtures/products.json
+python src/manage.py loaddata fixtures/packages.json
+python src/manage.py loaddata fixtures/additional_services.json
+python src/manage.py loaddata fixtures/faqs.json
+
+python src/manage.py flush
+python src/manage.py flush --noinput
+
+# Run the database initialization script
+sh scripts/load_initial_data.sh
