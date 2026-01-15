@@ -1,0 +1,35 @@
+{% if results.products or results.packages or results.additional_services or results.faqs %}
+    {% for product in results.products %}
+        <div class="p-4 border rounded shadow">
+            <h2 class="font-bold">{{ product.title }}</h2>
+            <p>{{ product.description|truncatechars:200 }}</p>
+            <small>Категория: {{ product.category.name }}</small>
+        </div>
+    {% endfor %}
+
+    {% for package in results.packages %}
+        <div class="p-4 border rounded shadow">
+            <h2 class="font-bold">{{ package.name }}</h2>
+            <p>{{ package.description|truncatechars:200 }}</p>
+            <small>Продукт: {{ package.product.title }}</small>
+        </div>
+    {% endfor %}
+
+    {% for service in results.additional_services %}
+        <div class="p-4 border rounded shadow">
+            <h2 class="font-bold">{{ service.name }}</h2>
+            <p>{{ service.description|truncatechars:200 }}</p>
+            <small>Продукт: {{ service.product.title }}</small>
+        </div>
+    {% endfor %}
+
+    {% for faq in results.faqs %}
+        <div class="p-4 border rounded shadow">
+            <h2 class="font-bold">Q: {{ faq.question }}</h2>
+            <p>A: {{ faq.answer|truncatechars:200 }}</p>
+            <small>Продукт: {{ faq.product.title }}</small>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Ничего не найдено</p>
+{% endif %}

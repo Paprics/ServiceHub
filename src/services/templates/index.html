@@ -4,63 +4,67 @@
 
 {% block content %}
 
-    <section class="max-w-4xl mx-auto">
+<section class="max-w-4xl mx-auto">
 
-        <!-- Заголовок -->
-        <h1 class="text-2xl md:text-3xl font-bold text-primary mb-6">
-            Швидкий пошук по сервісах
-        </h1>
+    <!-- Заголовок -->
+    <h1 class="text-2xl md:text-3xl font-bold text-primary mb-6">
+        Швидкий пошук по сервісах
+    </h1>
 
-        <!-- Форма пошуку -->
-        <form method="get" class="flex flex-col md:flex-row gap-3 mb-8">
+    <!-- Форма пошуку -->
+    <form
+        method="get"
+        hx-get="{% url 'services:index' %}"
+        hx-target="#results"
+        hx-trigger="submit"
+        class="flex flex-col md:flex-row gap-3 mb-8"
+    >
 
-            <!-- Тип пошуку -->
-            <select
-                    name="scope"
-                    class="w-full md:w-48 border border-primary rounded-lg px-3 py-3 text-text focus:outline-none focus:ring-2 focus:ring-highlight"
-            >
-                <!-- Первый пункт всегда -->
-                <option value="all">Вся база</option>
-
-                {% if categories %}
-                    {% for category in categories %}
-                        <option value="{{ category.id }}">{{ category.name }}</option>
-                    {% endfor %}
-                {% else %}
-                    <!-- Если категорий нет -->
-                    <option value="" disabled>Категорий нет</option>
-                {% endif %}
-            </select>
-
-            <input
-                    type="text"
-                    name="q"
-                    placeholder="Введіть запит для пошуку..."
-                    class="flex-1 border border-primary rounded-lg px-4 py-3 text-lg text-text focus:outline-none focus:ring-2 focus:ring-highlight"
-            >
-
-            <button
-                    type="submit"
-                    class="bg-accent text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition"
-            >
-                Пошук
-            </button>
-
-        </form>
-
-        <!-- Результати (поки порожньо) -->
-        <div
-                id="results"
-                class="space-y-4 opacity-0 transition-opacity duration-300"
+        <!-- Тип пошуку -->
+        <select
+            name="scope"
+            class="w-full md:w-48 border border-primary rounded-lg px-3 py-3 text-text focus:outline-none focus:ring-2 focus:ring-highlight"
         >
-            {#
-            Тут пізніше:
-            - карточки
-            - accordion
-            - або список результатів
-            #}
-        </div>
+            <option value="all" {% if selected_category == 'all' %}selected{% endif %}>Вся база</option>
 
-    </section>
+            {% if categories %}
+                {% for category in categories %}
+                    <option value="{{ category.id }}"
+                            {% if selected_category|add:'' == category.id|add:'' %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            {% else %}
+                <option value="" disabled>Категорий нет</option>
+            {% endif %}
+        </select>
+
+        <input
+            type="text"
+            name="q"
+            value="{{ query }}"
+            placeholder="Введіть запит для пошуку..."
+            class="flex-1 border border-primary rounded-lg px-4 py-3 text-lg text-text focus:outline-none focus:ring-2 focus:ring-highlight"
+        />
+
+        <button
+            type="submit"
+            class="bg-accent text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition"
+        >
+            Пошук
+        </button>
+
+    </form>
+
+    <!-- Результаты -->
+    <div
+        id="results"
+        class="space-y-4"
+    >
+        <p>DEBUG: {{ results }}</p>
+        {# сюда подгрузятся результаты через HTMX #}
+    </div>
+
+</section>
 
 {% endblock %}
