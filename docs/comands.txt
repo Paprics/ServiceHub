@@ -11,3 +11,6 @@ python src/manage.py flush --noinput
 
 # Run the database initialization script
 sh scripts/load_initial_data.sh
+
+pipenv requirements > requirements.txt
+
