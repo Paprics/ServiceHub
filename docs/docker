@@ -2,7 +2,8 @@
 | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
 | `docker compose build`                                 | Собирает контейнеры (использует Dockerfile). Если зависимости или Dockerfile изменились — нужно пересобирать. |
 | `docker compose up`  -d                                | Поднимает контейнеры (строит, если не построены) и запускает их. Добавь `-d` для фонового режима.             |
-| `docker compose up --build`                            | Пересобирает и запускает контейнеры.                                                                          |
+| `docker compose up --build`                            | Пересобирает и запускает контейнеры.
+| 'docker compose up --build --force-recreate'
 | `docker compose down`                                  | Останавливает и удаляет контейнеры, сети и тома по необходимости.
 | docker compose down -v
 | `docker compose stop`                                  | Останавливает контейнеры без удаления.                                                                        |
@@ -51,3 +52,18 @@ python src/manage.py migrate
 python src/manage.py flush --noinput
 # Загрузить фикстуры с начальными данными
 sh scripts/load_initial_data.sh
+
+docker compose up --build             # пересобрать + запустить (foreground)
+docker compose up --build -d          # то же, но в фоне (detached)
+docker compose up --build --force-recreate   # принудительно пересоздать контейнеры
+docker compose up --build --no-deps   # не запускать зависимости (осторожно!)
+
+# Полная пересборка без кэша (когда нужно с нуля)
+docker compose build --no-cache
+docker compose up -d
+
+# Только пересобрать, не запускать
+docker compose build
+
+# Запустить без пересборки (быстро)
+docker compose up

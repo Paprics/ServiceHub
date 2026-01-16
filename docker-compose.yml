@@ -1,36 +1,48 @@
 services:
   db:
-    container_name: servicehub-web
     image: postgres:15
+    container_name: servicehub-postgres
     environment:
       POSTGRES_DB: servicehub
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
 
   web:
-    container_name: servicehub-db
+    container_name: servicehub-django
     build: .
-    command: sh -c "
-      python src/manage.py migrate &&
-      sh scripts/load_initial_data.sh &&
-      python src/manage.py runserver 0.0.0.0:8000 "
+    command: >
+      sh -c "
+        echo 'Waiting for PostgreSQL to be ready...' &&
+        until pg_isready -h db -U postgres -p 5432; do sleep 1; done &&
+        echo 'PostgreSQL is ready' &&
+        python src/manage.py migrate &&
+        sh scripts/load_initial_data.sh &&
+        python src/manage.py runserver 0.0.0.0:8000
+      "
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     environment:
-      MODE: prod
+      MODE: "prod"                  # ← вот так надёжнее
+      POSTGRES_HOST: db
       POSTGRES_DB: servicehub
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_HOST: db
-      POSTGRES_PORT: 5432
+      POSTGRES_PORT: "5432"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
 volumes:
   postgres_data:

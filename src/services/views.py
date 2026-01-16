@@ -17,7 +17,7 @@ class IndexView(View):
 
         if request.headers.get('HX-Request') == 'true':
             results = SearchEngine.search(query=query, category_id=selected_category)
-            print("DEBUG RESULTS:", results)
+
             return render(request, self.results_template, {'results': results})
 
         context = {
