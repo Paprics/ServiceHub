@@ -8,6 +8,7 @@ django = "==5.2.10"
 psycopg2-binary = "*"
 
 [dev-packages]
+django-rosetta = "*"
 
 [requires]
 python_version = "3.11"

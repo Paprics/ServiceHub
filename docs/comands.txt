@@ -14,3 +14,8 @@ sh scripts/load_initial_data.sh
 
 pipenv requirements > requirements.txt
 
+django-admin makemessages -l uk
+django-admin makemessages -l ru
+django-admin makemessages -l en
+django-admin compilemessages
+
