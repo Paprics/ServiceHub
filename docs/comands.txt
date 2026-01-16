@@ -1,0 +1,21 @@
+
+
+python src/manage.py loaddata fixtures/categories.json
+python src/manage.py loaddata fixtures/products.json
+python src/manage.py loaddata fixtures/packages.json
+python src/manage.py loaddata fixtures/additional_services.json
+python src/manage.py loaddata fixtures/faqs.json
+
+python src/manage.py flush
+python src/manage.py flush --noinput
+
+# Run the database initialization script
+sh scripts/load_initial_data.sh
+
+pipenv requirements > requirements.txt
+
+django-admin makemessages -l uk
+django-admin makemessages -l ru
+django-admin makemessages -l en
+django-admin compilemessages
+

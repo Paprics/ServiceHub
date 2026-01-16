@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}ServiceHub — Search{% endblocktrans %}
+{% endblock %}
+
+{% block content %}
+
+<section class="max-w-4xl mx-auto">
+
+    <!-- Заголовок -->
+    <h1 class="text-2xl md:text-3xl font-bold text-primary mb-6">
+        {% blocktrans %}Quick search across services{% endblocktrans %}
+    </h1>
+
+    <!-- Форма поиска -->
+    <form
+        method="get"
+        hx-get="{% url 'services:index' %}"
+        hx-target="#results"
+        hx-trigger="submit"
+        class="flex flex-col md:flex-row gap-3 mb-8"
+    >
+
+        <!-- Тип поиска -->
+        <select
+            name="scope"
+            class="w-full md:w-48 border border-primary rounded-lg px-3 py-3 text-text focus:outline-none focus:ring-2 focus:ring-highlight"
+        >
+            <option value="all" {% if selected_category == 'all' %}selected{% endif %}>
+                {% blocktrans %}All database{% endblocktrans %}
+            </option>
+
+            {% if categories %}
+                {% for category in categories %}
+                    <option value="{{ category.id }}"
+                            {% if selected_category|add:'' == category.id|add:'' %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            {% else %}
+                <option value="" disabled>
+                    {% blocktrans %}No categories available{% endblocktrans %}
+                </option>
+            {% endif %}
+        </select>
+
+        <input
+            type="text"
+            name="q"
+            value="{{ query }}"
+            placeholder="{% blocktrans %}Enter search query...{% endblocktrans %}"
+            class="flex-1 border border-primary rounded-lg px-4 py-3 text-lg text-text focus:outline-none focus:ring-2 focus:ring-highlight"
+        />
+
+        <button
+            type="submit"
+            class="bg-accent text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition"
+        >
+            {% blocktrans %}Search{% endblocktrans %}
+        </button>
+
+    </form>
+
+    <!-- Результаты -->
+    <div
+        id="results"
+        class="space-y-4"
+    >
+        {# сюда подгрузятся результаты через HTMX #}
+    </div>
+
+</section>
+
+{% endblock %}

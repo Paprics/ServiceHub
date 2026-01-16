@@ -1,0 +1,29 @@
+[
+  {
+    "model": "services.Package",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "name": "Basic Package",
+      "description": "Executive project summary, structured business concept, market opportunity analysis, SWOT analysis, operational plan, organizational structure, investment strategy, financial modeling, economical efficiency assessment."
+    }
+  },
+  {
+    "model": "services.Package",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "name": "Recommended Extended Package",
+      "description": "Detailed executive summary, comprehensive business model, in-depth market and competitive analysis, marketing strategy, production calendar schedule, comprehensive financial planning."
+    }
+  },
+  {
+    "model": "services.Package",
+    "pk": 3,
+    "fields": {
+      "product": 1,
+      "name": "Premium Package",
+      "description": "Strategic executive summary, business ecosystem design, expert market assessment, strategic competitive analysis, integrated marketing strategy, optimized production and logistics, investment forecasts, risk and sensitivity analysis."
+    }
+  }
+]

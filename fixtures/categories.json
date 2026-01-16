@@ -1,0 +1,30 @@
+[
+  {
+    "model": "services.Category",
+    "pk": 1,
+    "fields": {
+      "name": "Финансы"
+    }
+  },
+  {
+    "model": "services.Category",
+    "pk": 2,
+    "fields": {
+      "name": "Маркетинг"
+    }
+  },
+  {
+    "model": "services.Category",
+    "pk": 3,
+    "fields": {
+      "name": "IT"
+    }
+  },
+  {
+    "model": "services.Category",
+    "pk": 4,
+    "fields": {
+      "name": "Обучение продажников"
+    }
+  }
+]

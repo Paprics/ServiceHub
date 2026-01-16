@@ -1,0 +1,20 @@
+[
+  {
+    "model": "services.FAQ",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "question": "What standards are used?",
+      "answer": "Business plans are developed according to UNIDO and EBRD standards."
+    }
+  },
+  {
+    "model": "services.FAQ",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "question": "What is included in the Basic Package?",
+      "answer": "The Basic Package includes executive project summary, structured business concept, market opportunity analysis, SWOT analysis, operational plan, organizational structure, investment strategy, financial modeling, and economical efficiency assessment."
+    }
+  }
+]

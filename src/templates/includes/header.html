@@ -1,0 +1,22 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<header class="bg-background border-b border-primary flex items-center justify-between px-6 py-4 shadow-sm">
+    <h1 class="text-2xl font-bold text-primary">ServiceHub</h1>
+
+    <form action="{% url 'set_language' %}" method="post" class="flex items-center space-x-2">
+        {% csrf_token %}
+        <button type="submit" name="language" value="uk"
+                class="text-text hover:text-accent transition-colors {% if LANGUAGE_CODE == 'uk' %}font-bold{% endif %}">
+            🇺🇦 UA
+        </button>
+        <button type="submit" name="language" value="en"
+                class="text-text hover:text-accent transition-colors {% if LANGUAGE_CODE == 'en' %}font-bold{% endif %}">
+            🇬🇧 EN
+        </button>
+        <button type="submit" name="language" value="ru"
+                class="text-text hover:text-accent transition-colors {% if LANGUAGE_CODE == 'ru' %}font-bold{% endif %}">
+            🇷🇺 RU
+        </button>
+    </form>
+</header>

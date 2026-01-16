@@ -1,0 +1,69 @@
+| Команда                                                | Что делает                                                                                                    |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `docker compose build`                                 | Собирает контейнеры (использует Dockerfile). Если зависимости или Dockerfile изменились — нужно пересобирать. |
+| `docker compose up`  -d                                | Поднимает контейнеры (строит, если не построены) и запускает их. Добавь `-d` для фонового режима.             |
+| `docker compose up --build`                            | Пересобирает и запускает контейнеры.
+| 'docker compose up --build --force-recreate'
+| `docker compose down`                                  | Останавливает и удаляет контейнеры, сети и тома по необходимости.
+| docker compose down -v
+| `docker compose stop`                                  | Останавливает контейнеры без удаления.                                                                        |
+| `docker compose start`                                 | Запускает ранее остановленные контейнеры.                                                                     |
+| `docker compose restart`                               | Перезапускает контейнеры (stop + start).                                                                      |
+| `docker compose logs`                                  | Выводит логи контейнеров.                                                                                     |
+| `docker compose exec <service> <command>`              | Выполнить команду внутри работающего контейнера. Например:                                                    |
+| `docker compose exec web python src/manage.py migrate` |                                                                                                               |
+| `docker compose ps`                                    | Список запущенных контейнеров и их статус.                                                                    |
+
+# Docker Compose – основные команды
+
+# Собрать контейнеры из Dockerfile
+docker-compose build
+# Собрать и сразу поднять контейнеры
+docker-compose up --build
+# Поднять контейнеры (если не построены – построит автоматически)
+docker-compose up
+# Поднять контейнеры в фоне (detached mode)
+docker-compose up -d
+# Перезапустить все контейнеры
+docker-compose restart
+# Остановить контейнеры без удаления
+docker-compose stop
+# Запустить ранее остановленные контейнеры
+docker-compose start
+# Остановить и удалить контейнеры, сети и тома по необходимости
+docker-compose down
+# Просмотр логов контейнеров
+docker-compose logs
+# Просмотр логов конкретного сервиса
+docker-compose logs <service>
+# Список запущенных контейнеров и их статус
+docker-compose ps
+# Выполнить команду внутри контейнера (например, Django migrate)
+docker-compose exec <service> <command>
+# Примеры:
+# docker-compose exec web python src/manage.py migrate
+# docker-compose exec web python src/manage.py loaddata fixtures/categories.json
+
+# Django / миграции / начальные данные
+
+# Применить все миграции
+python src/manage.py migrate
+# Сбросить базу данных (осторожно, все данные будут удалены!)
+python src/manage.py flush --noinput
+# Загрузить фикстуры с начальными данными
+sh scripts/load_initial_data.sh
+
+docker compose up --build             # пересобрать + запустить (foreground)
+docker compose up --build -d          # то же, но в фоне (detached)
+docker compose up --build --force-recreate   # принудительно пересоздать контейнеры
+docker compose up --build --no-deps   # не запускать зависимости (осторожно!)
+
+# Полная пересборка без кэша (когда нужно с нуля)
+docker compose build --no-cache
+docker compose up -d
+
+# Только пересобрать, не запускать
+docker compose build
+
+# Запустить без пересборки (быстро)
+docker compose up
