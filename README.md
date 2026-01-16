@@ -30,7 +30,7 @@ cd servicehub
 2. Запустити контейнер через Docker Compose:
 
 ```bash
-docker-compose up -d
+docker compose up --build
 ```
 
 3. Відкрити браузер за адресою:
